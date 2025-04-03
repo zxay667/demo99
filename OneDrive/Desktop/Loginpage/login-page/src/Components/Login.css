@@ -1,0 +1,223 @@
+@keyframes drawSpiral {
+    0% {
+        clip-path: polygon(0 0, 0 0, 0 0);
+        opacity: 0;
+    }
+    100% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        opacity: 1;
+    }
+}
+
+@keyframes removeSpiral {
+    0% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        opacity: 1;
+    }
+    100% {
+        clip-path: polygon(0 0, 0 0, 0 0);
+        opacity: 0;
+    }
+}
+
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border: 2px solid transparent;
+    border-image: repeating-linear-gradient(45deg, 
+        transparent 0px,
+        transparent 10px,
+        rgba(76, 175, 80, 0.5) 10px,
+        rgba(76, 175, 80, 0.5) 20px
+    ) 1;
+    pointer-events: none;
+    opacity: 0;
+    border-radius: 24px;
+    z-index: -1;
+}
+
+.login-container:not(:hover)::before {
+    animation: drawSpiral 0.5s ease forwards;
+}
+
+.login-container:hover::before {
+    animation: removeSpiral 0.3s ease forwards;
+}
+
+@keyframes dropAnimation {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(20px);
+        opacity: 0.7;
+    }
+}
+
+.login-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.2),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 24px;
+    width: 300px;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+    transform: translate(-50%, -50%);
+}
+
+.login-container:not(:hover) {
+    transform: translate(-50%, -50%);
+}
+
+.login-container:hover {
+    transform: translate(-50%, -50%);
+}
+
+.login-container form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.login-container input {
+    width: 80%;
+    margin: 8px auto;
+    text-align: center;
+}
+
+.login-container input {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.login-container input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 128, 255, 0.3);
+}
+
+.login-container button {
+    width: 80%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(145deg, #ffffff, #f5f5f5);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1),
+                -4px -4px 8px rgba(255, 255, 255, 0.8);
+}
+
+.login-container button[type="submit"] {
+    background: transparent;
+    color: #333;
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+.login-container button[type="submit"]:active {
+    color: #4CAF50;
+    text-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    filter: blur(0.5px);
+    transform: scale(1.05);
+}
+
+.login-container button[type="submit"]:hover {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
+
+.login-container button:not([type="submit"]):hover {
+    background: linear-gradient(145deg, #ffffff, #ffffff);
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1),
+                -6px -6px 12px rgba(255, 255, 255, 0.8);
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+    transition: text-shadow 0.3s ease;
+    pointer-events: none;
+    position: relative;
+}
+
+.login-container:hover h2 {
+    animation: dropAnimation 0.5s ease forwards;
+    animation-delay: 1s;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.login-container:not(:hover) h2 {
+    animation: none;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.login-container button:nth-child(1) {
+    transition: all 0.3s ease;
+}
+
+.login-container .button-group button:first-child {
+    background: transparent;
+    box-shadow: none;
+    color: #333;
+}
+
+.login-container .button-group button:first-child:active {
+    color: #87CEEB;
+    text-shadow: 0 0 8px rgba(135, 206, 235, 0.6);
+    filter: blur(0.5px);
+    transform: scale(1.05);
+}
+
+.login-container .button-group button:first-child:hover {
+    background: rgba(135, 206, 235, 0.1);
+    color: #87CEEB;
+}
+
+.login-container .button-group button:last-child {
+    background: transparent;
+    box-shadow: none;
+    color: #333;
+}
+
+.login-container .button-group button:last-child:active {
+    color: #4CAF50;
+    text-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    filter: blur(0.5px);
+    transform: scale(1.05);
+}
+
+.login-container .button-group button:last-child:hover {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
